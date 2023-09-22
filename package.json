@@ -1,0 +1,25 @@
+{
+  "name": "devops-heatmap",
+  "version": "1.0.0",
+  "description": "A DevOps platform that displays GitHub repo interactions from organization collaborators in a heatmap.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/devops-heatmap.git"
+  },
+  "author": "Your Name",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yourusername/devops-heatmap/issues"
+  },
+  "homepage": "https://github.com/yourusername/devops-heatmap#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.12.3",
+    "redis": "^4.6.9"
+  }
+}

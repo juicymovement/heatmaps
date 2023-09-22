@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DevOps Heatmap</title>
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/modules/heatmap.js"></script>
+  <link rel="stylesheet" type="text/css" href="/styles.css">
+</head>
+<body>
+  <h1>DevOps Heatmap</h1>
+  <div id="heatmap" style="height: 600px;"></div>
+  
+  <script>
+    fetch('/api/getHeatmapData')
+      .then(res => res.json())
+      .then(data => {
+        Highcharts.chart('heatmap', {
+          chart: {
+            type: 'heatmap'
+          },
+          title: {
+            text: 'DevOps Activity Heatmap'
+          },
+          xAxis: {
+            categories: data.xCategories // Repo names or Collaborator names
+          },
+          yAxis: {
+            categories: data.yCategories // Time frames like 'Last Week', 'Last Month', etc.
+          },
+          colorAxis: {
+            min: 0,
+            max: data.maxValue,
+            stops: [
+              [0, '#550000'], // Dark Red
+              [0.5, '#AAAAAA'], // Gray
+              [1, '#FFFFFF'] // White
+            ]
+          },
+          series: [{
+            name: 'Activity',
+            data: data.heatmapData
+          }]
+        });
+      })
+      .catch(err => {
+        console.error("There was an error fetching the heatmap data:", err);
+      });
+  </script>
+</body>
+</html>
