@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yourusername/devops-heatmap.git"
+    "url": "git+https://github.com/juicymovement/heatmaps.git"
   },
-  "author": "Your Name",
+  "author": "juicymovement",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/yourusername/devops-heatmap/issues"
+    "url": "https://github.com/juicymovement/heatmaps/issues"
   },
-  "homepage": "https://github.com/yourusername/devops-heatmap#readme",
+  "homepage": "https://github.com/juicymovement/heatmaps#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
