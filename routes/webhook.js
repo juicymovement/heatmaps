@@ -19,20 +19,37 @@ const calculateProductivity = (eventCounts) => {
 };
 
 // POST route to capture GitHub webhook data
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   const payload = req.body;
   const eventType = req.headers['x-github-event'];
 
-  const repoInteraction = new RepoInteraction({
-    repoName: payload.repository.name,
-    collaborator: payload.sender.login,
-    interactionType: eventType,
-    timestamp: new Date()
-  });
+  try {
+    const repoInteraction = new RepoInteraction({
+      repoName: payload.repository.name,
+      collaborator: payload.sender.login,
+      interactionType: eventType,
+      timestamp: new Date(),
+    });
 
-  repoInteraction.save()
-    .then(() => res.status(200).json({ message: 'Webhook data processed successfully.' }))
-    .catch(err => res.status(500).json({ message: 'Error processing webhook data.', error: err }));
+    if (eventType === 'push' && payload.commits && payload.commits.length > 0) {
+      // Extract and calculate insertions and changed files from commits
+      let insertions = 0;
+      let changedFiles = 0;
+
+      payload.commits.forEach((commit) => {
+        insertions += commit.stats.additions;
+        changedFiles += commit.stats.total;
+      });
+
+      repoInteraction.insertions = insertions;
+      repoInteraction.changedFiles = changedFiles;
+    }
+
+    await repoInteraction.save();
+    res.status(200).json({ message: 'Webhook data processed successfully.' });
+  } catch (err) {
+    res.status(500).json({ message: 'Error processing webhook data.', error: err });
+  }
 });
 
 // GET route to fetch heatmap data

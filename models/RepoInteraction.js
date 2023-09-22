@@ -30,6 +30,14 @@ const RepoInteractionSchema = new mongoose.Schema({
   numCommits: {
     type: Number,
     default: 0
+  },
+  insertions: {
+    type: Number,
+    default: 0 // Add this field
+  },
+  changedFiles: {
+    type: Number,
+    default: 0 // Add this field
   }
 });
 
