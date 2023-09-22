@@ -1,3 +1,14 @@
+// Your existing app.js code here
+
+// ---------------------
+// Added New Comments
+// ---------------------
+// This is a new comment to demonstrate changes to the app.js file.
+// You can also add other code snippets here as per your requirements.
+// ---------------------
+
+// Your existing app.js code continues here
+
 // Import necessary packages
 const express = require('express');
 const path = require('path');
