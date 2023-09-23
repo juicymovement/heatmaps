@@ -63,7 +63,7 @@ router.post('/', async (req, res) => {
     await repoInteraction.save();
     res.status(200).json({ message: 'Webhook data processed successfully.' });
   } catch (err) {
-    console.log('Error:', err);
+    console.error(err);
     res.status(500).json({ message: 'Error processing webhook data.', error: err });
   }
 });
