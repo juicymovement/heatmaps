@@ -43,6 +43,9 @@ router.post('/', async (req, res) => {
       timestamp: new Date(),
     });
 
+    console.log('payload:', payload);
+    console.log('repoInteraction:', repoInteraction);
+
     if (eventType === 'push' && payload.commits && payload.commits.length > 0) {
       // Extract and calculate insertions and changed files from commits
       let insertions = 0;
@@ -60,6 +63,7 @@ router.post('/', async (req, res) => {
     await repoInteraction.save();
     res.status(200).json({ message: 'Webhook data processed successfully.' });
   } catch (err) {
+    console.log('Error:', err);
     res.status(500).json({ message: 'Error processing webhook data.', error: err });
   }
 });
