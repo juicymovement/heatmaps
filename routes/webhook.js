@@ -60,6 +60,8 @@ router.post('/', async (req, res) => {
       repoInteraction.changedFiles = changedFiles;
     }
 
+    console.log(repoInteraction);
+
     await repoInteraction.save();
     res.status(200).json({ message: 'Webhook data processed successfully.' });
   } catch (err) {
